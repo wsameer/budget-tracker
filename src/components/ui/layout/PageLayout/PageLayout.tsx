@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { ReactNode } from 'react';
 
-export const PageLayout = () => {
-  return (
-    <div>PageLayout</div>
-  )
+interface PageLayoutProps {
+  children: ReactNode;
 }
+
+export const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
+  return (
+    <div>
+      {children}
+    </div>
+  );
+};

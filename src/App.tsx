@@ -1,10 +1,14 @@
 import React from 'react'
-import { Button } from './components/ui/button'
+import { PageLayout } from './components/ui/layout/PageLayout/PageLayout'
+import { router } from './routes/router'
+import { RouterProvider } from 'react-router-dom'
 
 const App = () => {
   return (
     <div>
-      <Button>Click me</Button>
+      <PageLayout>
+        <RouterProvider router={router} />
+      </PageLayout>
     </div>
   )
 }
