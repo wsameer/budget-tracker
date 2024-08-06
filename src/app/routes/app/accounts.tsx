@@ -1,7 +1,11 @@
 import React from 'react'
 
+import { PageLayout } from '@/components/layout/page-layout'
+
 export const AccountsRoute = () => {
   return (
-    <div>AccountsRoute</div>
+    <PageLayout>
+      <p>AccountsRoute</p>
+    </PageLayout>
   )
 }
