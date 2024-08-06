@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "@/components/ui/link";
-import { HomeIcon } from "lucide-react";
+import { Home } from "lucide-react";
 
 export const NotFoundRoute = () => {
   return (
@@ -10,8 +10,8 @@ export const NotFoundRoute = () => {
       </h3>
       <p className="leading-7 [&:not(:first-child)]:mt-6 mb-6">Sorry, the page you are looking for does not exist.</p>
       <Button variant="outline">
-        <Link to="/" className="flex items-center" replace>
-          <HomeIcon className="mr-2 h-4 w-4" />
+        <Link to="/app" className="flex items-center" replace>
+          <Home className="mr-2 h-4 w-4" />
           Go to Home
         </Link>
       </Button>
