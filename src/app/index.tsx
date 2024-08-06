@@ -1,20 +1,20 @@
-import React from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import React, { useMemo } from 'react'
+import { RouterProvider } from 'react-router-dom'
+import AppProvider from './app-provider'
+
+import { createRouter } from './routes'
 
 const AppRouter = () => {
-  const router = createBrowserRouter([{
-    path: '/',
-    element: <div>hello world!</div>
-  }])
+  const router = useMemo(() => createRouter(), []);
 
   return <RouterProvider router={router} />
 }
 
 const App = () => {
   return (
-    <div>
+    <AppProvider>
       <AppRouter />
-    </div>
+    </AppProvider>
   )
 }
 
