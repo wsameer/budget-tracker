@@ -1,21 +1,13 @@
 import React from 'react'
-import { BarChart2Icon, CreditCardIcon, FileTextIcon, HomeIcon, Settings, WalletMinimal } from 'lucide-react';
-import { NavLink, useNavigate } from "react-router-dom";
+import { BarChart2Icon, CreditCardIcon, FileTextIcon, HomeIcon, Settings } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
 import { useResponsive } from '@/hooks/useResponsive';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { cn } from '@/utils/cn';
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
 
-type SideNavigationItem = {
-  icon: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-  path: string;
-  label: string;
-};
+import { SideNavigationItem } from './types';
+import { NavItem } from './nav-item';
+import { BrandLogo } from './brand-logo';
 
 export const Navigation = () => {
   const { isMobile } = useResponsive();
@@ -28,30 +20,6 @@ export const Navigation = () => {
     { icon: BarChart2Icon, label: 'Stats', path: '/app/stats' },
     { icon: Settings, label: 'Settings', path: '/app/settings' },
   ].filter(Boolean) as SideNavigationItem[];
-
-  console.log();
-
-
-  const NavItem = ({ item }: { item: SideNavigationItem }) => {
-    const isActive = location.pathname === item.path;
-    return (
-      <Tooltip key={item.label}>
-        <TooltipTrigger asChild>
-          <NavLink
-            key={item.label}
-            to={item.path}
-            className={cn('flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8',
-              isActive && 'text-accent-foreground bg-accent'
-            )}
-          >
-            <item.icon className="h-5 w-5" />
-            <span className="sr-only">{item.label}</span>
-          </NavLink>
-        </TooltipTrigger>
-        <TooltipContent side="right">{item.label}</TooltipContent>
-      </Tooltip>
-    )
-  }
 
   if (isMobile) {
     return (
@@ -73,14 +41,7 @@ export const Navigation = () => {
   return (
     <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
       <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
-        <NavLink
-          to="/app"
-          className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
-        >
-          <WalletMinimal className="h-4 w-4 transition-all group-hover:scale-110" />
-          <span className="sr-only">Budget Tracker</span>
-        </NavLink>
-
+        <BrandLogo />
         {navItems.slice(0, -1).map((item) => (
           <NavItem key={item.label} item={item} />
         ))}
