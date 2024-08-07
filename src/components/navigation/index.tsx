@@ -9,6 +9,7 @@ import { SideNavigationItem } from './types';
 import { NavItem } from './nav-item';
 import { BrandLogo } from './brand-logo';
 import { cn } from '@/utils/cn';
+import { AddTransaction } from '@/features/add-transaction/add-transaction';
 
 export const Navigation = () => {
   const { isMobile } = useResponsive();
@@ -35,9 +36,7 @@ export const Navigation = () => {
             >
               <item.icon className="h-6 w-6" />
             </Button>
-            {index === 1 && <Button className="rounded-full h-12 w-12" variant="destructive" size="icon">
-              <Plus className="h-6 w-6" />
-            </Button>}
+            {index === 1 && <AddTransaction />}
           </React.Fragment>
         ))}
       </nav>
