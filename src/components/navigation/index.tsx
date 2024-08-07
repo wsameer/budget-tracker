@@ -1,5 +1,5 @@
 import React from 'react'
-import { BarChart2Icon, CreditCardIcon, FileTextIcon, HomeIcon, Settings } from 'lucide-react';
+import { BarChart2Icon, CreditCardIcon, FileTextIcon, HomeIcon, Plus, Settings } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 
 import { useResponsive } from '@/hooks/useResponsive';
@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { SideNavigationItem } from './types';
 import { NavItem } from './nav-item';
 import { BrandLogo } from './brand-logo';
+import { cn } from '@/utils/cn';
 
 export const Navigation = () => {
   const { isMobile } = useResponsive();
@@ -24,15 +25,20 @@ export const Navigation = () => {
   if (isMobile) {
     return (
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-16">
-        {navItems.map((item, index) => (
-          <Button
-            key={index}
-            variant={location.pathname === item.path ? "default" : "ghost"}
-            size="icon"
-            onClick={() => navigate(item.path)}
-          >
-            <item.icon className="h-5 w-5" />
-          </Button>
+        {navItems.slice(0, -1).map((item, index) => (
+          <React.Fragment key={item.path}>
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn(location.pathname === item.path ? 'text-black' : 'text-gray-400')}
+              onClick={() => navigate(item.path)}
+            >
+              <item.icon className="h-6 w-6" />
+            </Button>
+            {index === 1 && <Button className="rounded-full h-12 w-12" variant="destructive" size="icon">
+              <Plus className="h-6 w-6" />
+            </Button>}
+          </React.Fragment>
         ))}
       </nav>
     )
