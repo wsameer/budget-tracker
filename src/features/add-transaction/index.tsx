@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer';
 import { DialogFooter, DialogHeader } from '@/components/ui/dialog';
 import { Dialog, DialogTrigger, DialogContent, DialogTitle } from '@/components/ui/dialog';
+import { Transactions } from './transactions';
 
 export const AddTransaction = () => {
   const [open, setOpen] = React.useState(false)
@@ -25,14 +26,16 @@ export const AddTransaction = () => {
         </DrawerTrigger>
         <DrawerContent>
           <div className="mx-auto w-full max-w-sm">
-            <DrawerHeader>
+            <DrawerHeader className='text-left'>
               <DrawerTitle>Add a transaction</DrawerTitle>
             </DrawerHeader>
-            <div>Tabs</div>
+            <div className='p-4'>
+              <Transactions />
+            </div>
             <DrawerFooter>
-              <Button variant="outline">Add</Button>
+              <Button variant="destructive">Add</Button>
               <DrawerClose asChild>
-                <Button variant="outline">Cancel</Button>
+                <Button variant="secondary">Cancel</Button>
               </DrawerClose>
             </DrawerFooter>
           </div>
@@ -57,6 +60,9 @@ export const AddTransaction = () => {
           <DialogHeader>
             <DialogTitle>Add a transaction</DialogTitle>
           </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <Transactions />
+          </div>
           <DialogFooter>
             <Button type="submit">Save changes</Button>
           </DialogFooter>
