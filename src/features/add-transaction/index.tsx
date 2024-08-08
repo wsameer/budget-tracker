@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React, { useState } from 'react'
 import { Plus } from 'lucide-react'
 import { useResponsive } from '@/hooks/useResponsive';
 import { Button } from '@/components/ui/button';
@@ -7,9 +6,11 @@ import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerT
 import { DialogFooter, DialogHeader } from '@/components/ui/dialog';
 import { Dialog, DialogTrigger, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { Transactions } from './transactions';
+import { TransactionTypes } from './types';
 
 export const AddTransaction = () => {
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
+  const [selectedTab, setSelectedTab] = useState(TransactionTypes.EXPENSE);
   const { isMobile } = useResponsive();
 
   if (isMobile) {
@@ -27,10 +28,12 @@ export const AddTransaction = () => {
         <DrawerContent>
           <div className="mx-auto w-full max-w-sm">
             <DrawerHeader className='text-left'>
-              <DrawerTitle>Add a transaction</DrawerTitle>
+              <DrawerTitle>
+                Record {selectedTab === TransactionTypes.TRANSFER ? 'a' : 'an'} {selectedTab}
+              </DrawerTitle>
             </DrawerHeader>
             <div className='p-4'>
-              <Transactions />
+              <Transactions selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
             </div>
             <DrawerFooter>
               <Button variant="destructive">Add</Button>
@@ -58,10 +61,12 @@ export const AddTransaction = () => {
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Add a transaction</DialogTitle>
+            <DialogTitle>
+              Record {selectedTab === TransactionTypes.TRANSFER ? 'a' : 'an'} {selectedTab}
+            </DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
-            <Transactions />
+            <Transactions selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
           </div>
           <DialogFooter>
             <Button type="submit">Save changes</Button>

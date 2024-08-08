@@ -1,27 +1,36 @@
+import React from 'react'
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+import { TransactionsProps, TransactionTypes } from './types'
 
-export function Transactions() {
+
+export const Transactions = React.memo<TransactionsProps>(({ selectedTab, setSelectedTab }) => {
+  const transactionTypes = Object.values(TransactionTypes);
   return (
-    <Tabs defaultValue="expense" className="">
+    <Tabs
+      defaultValue={selectedTab}
+      onValueChange={(value) => setSelectedTab(value as TransactionTypes)}
+    >
       <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="income">Income</TabsTrigger>
-        <TabsTrigger value="expense">Expense</TabsTrigger>
-        <TabsTrigger value="transfer">Transfer</TabsTrigger>
+        {transactionTypes.map((type) => (
+          <TabsTrigger
+            key={type}
+            value={type}
+            className="w-full text-center capitalize"
+          >
+            {type}
+          </TabsTrigger>
+        ))}
       </TabsList>
-      <TabsContent value="income">
-        Income
-      </TabsContent>
-      <TabsContent value="expense">
-        Expense
-      </TabsContent>
-      <TabsContent value="transfer">
-        Transfer
-      </TabsContent>
+      {transactionTypes.map((type) => (
+        <TabsContent key={type} value={type}>
+          {type.charAt(0).toUpperCase() + type.slice(1)}
+        </TabsContent>
+      ))}
     </Tabs>
   )
-}
+})
