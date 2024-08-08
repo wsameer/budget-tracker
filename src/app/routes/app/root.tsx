@@ -3,8 +3,8 @@ import { Navigation } from '@/components/navigation';
 import { Spinner } from '@/components/ui/spinner';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Outlet, useLocation } from 'react-router-dom'
-import { AddTransaction } from '@/features/add-transaction/add-transaction';
 import { useResponsive } from '@/hooks/useResponsive';
+import { AddTransaction } from '@/features/add-transaction';
 
 export const AppRoot = () => {
   const location = useLocation();

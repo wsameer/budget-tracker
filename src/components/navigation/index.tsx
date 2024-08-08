@@ -9,7 +9,7 @@ import { SideNavigationItem } from './types';
 import { NavItem } from './nav-item';
 import { BrandLogo } from './brand-logo';
 import { cn } from '@/utils/cn';
-import { AddTransaction } from '@/features/add-transaction/add-transaction';
+import { AddTransaction } from '@/features/add-transaction';
 
 export const Navigation = () => {
   const { isMobile } = useResponsive();
