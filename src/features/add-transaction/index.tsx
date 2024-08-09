@@ -32,11 +32,10 @@ export const AddTransaction = () => {
                 Record {selectedTab === TransactionTypes.TRANSFER ? 'a' : 'an'} {selectedTab}
               </DrawerTitle>
             </DrawerHeader>
-            <div className='p-4'>
+            <div className='px-4'>
               <Transactions selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
             </div>
             <DrawerFooter>
-              <Button variant="destructive">Add</Button>
               <DrawerClose asChild>
                 <Button variant="secondary">Cancel</Button>
               </DrawerClose>

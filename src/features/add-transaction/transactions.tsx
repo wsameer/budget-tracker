@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import {
   Tabs,
   TabsContent,
@@ -6,10 +6,32 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { TransactionsProps, TransactionTypes } from './types'
+import { ExpenseForm } from './expense-form';
 
 
 export const Transactions = React.memo<TransactionsProps>(({ selectedTab, setSelectedTab }) => {
   const transactionTypes = Object.values(TransactionTypes);
+
+  const renderContent = useCallback(
+    () => {
+      switch (selectedTab) {
+        case TransactionTypes.EXPENSE:
+          return <ExpenseForm />;
+
+        case TransactionTypes.INCOME:
+          return <ExpenseForm />;
+
+        case TransactionTypes.TRANSFER:
+          return <ExpenseForm />;
+
+        default:
+          return null;
+      }
+    },
+    [selectedTab],
+  )
+
+
   return (
     <Tabs
       defaultValue={selectedTab}
@@ -28,7 +50,7 @@ export const Transactions = React.memo<TransactionsProps>(({ selectedTab, setSel
       </TabsList>
       {transactionTypes.map((type) => (
         <TabsContent key={type} value={type}>
-          {type.charAt(0).toUpperCase() + type.slice(1)}
+          {renderContent()}
         </TabsContent>
       ))}
     </Tabs>
