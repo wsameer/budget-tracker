@@ -11,13 +11,21 @@ export type TransactionsProps = {
   setSelectedTab: (value: TransactionTypes) => void
 }
 
-const CATEGORIES = ['', 'food', 'transport', 'housing', 'groceries'] as const
-export const CategoryEnum = z.enum(CATEGORIES)
-export type CategoryTypes = z.infer<typeof CategoryEnum>
+export const CATEGORIES = [
+  { label: '', value: null },
+  { label: 'Food', value: 'food' },
+  { label: 'Groceries', value: 'groceries' },
+  { label: 'Housing', value: 'housing' },
+  { label: 'Shopping', value: 'shopping' },
+  { label: 'Utilities', value: 'utilities' },
+  { label: 'Travel', value: 'travel' },
+  { label: 'Furniture', value: 'furniture' },
+  { label: 'Other', value: 'other' },
+] as const
 
-export const AccountEnum = z.enum([
-  'Chequing',
-  'Savings',
-  'Credit Card',
-  'Cash',
-])
+export const ACCOUNTS = [
+  { label: 'Chequing', value: 'chequing' },
+  { label: 'Savings', value: 'savings' },
+  { label: 'Credit Card', value: 'credit_card' },
+  { label: 'Cash', value: 'cash' },
+]
