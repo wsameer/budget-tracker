@@ -1,22 +1,26 @@
 import React from 'react'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/utils/cn';
-import { format } from "date-fns"
-import { CalendarIcon } from 'lucide-react';
-import { Calendar } from '@/components/ui/calendar';
-import { FormControl } from '@/components/ui/form';
-import { Button } from '@/components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+import { cn } from '@/utils/cn'
+import { format } from 'date-fns'
+import { CalendarIcon } from 'lucide-react'
+import { Calendar } from '@/components/ui/calendar'
+import { FormControl } from '@/components/ui/form'
+import { Button } from '@/components/ui/button'
 
 type DateSelectorProps = {
-  selected: Date | undefined;
-  onSelect: (selected: Date) => void | undefined;
+  selected: Date | undefined
+  onSelect: (selected: Date) => void | undefined
 }
 
 export const DateSelector = ({ selected, onSelect }: DateSelectorProps) => {
   const [isPopoverOpen, setIsPopoverOpen] = React.useState(false)
 
   const handleOnSelect = (date: Date | undefined) => {
-    if (!date) return;
+    if (!date) return
     onSelect(date)
     setIsPopoverOpen(false)
   }
@@ -26,17 +30,13 @@ export const DateSelector = ({ selected, onSelect }: DateSelectorProps) => {
       <PopoverTrigger asChild>
         <FormControl>
           <Button
-            variant={"outline"}
+            variant={'outline'}
             className={cn(
-              "w-3/4 text-left font-normal",
-              !selected && "text-muted-foreground"
+              'w-3/4 text-left font-normal',
+              !selected && 'text-muted-foreground',
             )}
           >
-            {selected ? (
-              format(selected, "PPP")
-            ) : (
-              <span>Pick a date</span>
-            )}
+            {selected ? format(selected, 'PPP') : <span>Pick a date</span>}
             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
           </Button>
         </FormControl>

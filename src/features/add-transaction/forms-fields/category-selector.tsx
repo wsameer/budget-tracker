@@ -1,20 +1,31 @@
 import React, { useState } from 'react'
 
-import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover';
-import { CATEGORIES } from '../types';
-import { Check, ChevronsUpDown } from 'lucide-react';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
-import { cn } from '@/utils/cn';
-import { FormControl } from '@/components/ui/form';
-import { Button } from '@/components/ui/button';
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from '@/components/ui/popover'
+import { CATEGORIES } from '../types'
+import { Check, ChevronsUpDown } from 'lucide-react'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command'
+import { cn } from '@/utils/cn'
+import { FormControl } from '@/components/ui/form'
+import { Button } from '@/components/ui/button'
 
 type Props = {
-  selected: string;
-  onSelect: (value: string) => void;
+  selected: string
+  onSelect: (value: string) => void
 }
 
 export const CategorySelector = React.memo<Props>(({ selected, onSelect }) => {
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
 
   return (
     <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
@@ -24,15 +35,13 @@ export const CategorySelector = React.memo<Props>(({ selected, onSelect }) => {
             variant="outline"
             role="combobox"
             className={cn(
-              "w-3/4 justify-between",
-              !selected && "text-muted-foreground"
+              'w-3/4 justify-between',
+              !selected && 'text-muted-foreground',
             )}
           >
             {selected
-              ? CATEGORIES.find(
-                (category) => category.value === selected
-              )?.label
-              : "Select category"}
+              ? CATEGORIES.find(category => category.value === selected)?.label
+              : 'Select category'}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </FormControl>
@@ -43,21 +52,19 @@ export const CategorySelector = React.memo<Props>(({ selected, onSelect }) => {
           <CommandList>
             <CommandEmpty>No category found.</CommandEmpty>
             <CommandGroup>
-              {CATEGORIES.map((category) => (
+              {CATEGORIES.map(category => (
                 <CommandItem
                   value={category.label}
                   key={category.value}
                   onSelect={() => {
-                    onSelect(category.value!);
-                    setIsPopoverOpen(false);
+                    onSelect(category.value!)
+                    setIsPopoverOpen(false)
                   }}
                 >
                   <Check
                     className={cn(
-                      "mr-2 h-4 w-4",
-                      category.value === selected
-                        ? "opacity-100"
-                        : "opacity-0"
+                      'mr-2 h-4 w-4',
+                      category.value === selected ? 'opacity-100' : 'opacity-0',
                     )}
                   />
                   {category.label}
@@ -71,4 +78,4 @@ export const CategorySelector = React.memo<Props>(({ selected, onSelect }) => {
   )
 })
 
-CategorySelector.displayName = "CategorySelector";
+CategorySelector.displayName = 'CategorySelector'

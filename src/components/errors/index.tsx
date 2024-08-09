@@ -1,21 +1,20 @@
-import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
-import { Button } from '../ui/button';
+import { isRouteErrorResponse, useRouteError } from 'react-router-dom'
+import { Button } from '../ui/button'
 
 export const MainErrorFallback = () => {
-
-  const error = useRouteError();
-  let errorMessage: string;
+  const error = useRouteError()
+  let errorMessage: string
 
   if (isRouteErrorResponse(error)) {
     // error is type `ErrorResponse`
-    errorMessage = error.data.message || error.statusText;
+    errorMessage = error.data.message || error.statusText
   } else if (error instanceof Error) {
-    errorMessage = error.message;
+    errorMessage = error.message
   } else if (typeof error === 'string') {
-    errorMessage = error;
+    errorMessage = error
   } else {
-    console.error(error);
-    errorMessage = 'Unknown error';
+    console.error(error)
+    errorMessage = 'Unknown error'
   }
 
   return (
@@ -34,5 +33,5 @@ export const MainErrorFallback = () => {
         Refresh
       </Button>
     </div>
-  );
-};
+  )
+}

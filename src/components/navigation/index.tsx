@@ -1,19 +1,26 @@
 import React from 'react'
-import { BarChart2Icon, CreditCardIcon, FileTextIcon, HomeIcon, Plus, Settings } from 'lucide-react';
-import { useNavigate } from "react-router-dom";
+import {
+  BarChart2Icon,
+  CreditCardIcon,
+  FileTextIcon,
+  HomeIcon,
+  Plus,
+  Settings,
+} from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
-import { useResponsive } from '@/hooks/useResponsive';
-import { Button } from '@/components/ui/button';
+import { useResponsive } from '@/hooks/useResponsive'
+import { Button } from '@/components/ui/button'
 
-import { SideNavigationItem } from './types';
-import { NavItem } from './nav-item';
-import { BrandLogo } from './brand-logo';
-import { cn } from '@/utils/cn';
-import { AddTransaction } from '@/features/add-transaction';
+import { SideNavigationItem } from './types'
+import { NavItem } from './nav-item'
+import { BrandLogo } from './brand-logo'
+import { cn } from '@/utils/cn'
+import { AddTransaction } from '@/features/add-transaction'
 
 export const Navigation = () => {
-  const { isMobile } = useResponsive();
-  const navigate = useNavigate();
+  const { isMobile } = useResponsive()
+  const navigate = useNavigate()
 
   const navItems = [
     { icon: HomeIcon, label: 'Dashboard', path: '/app' },
@@ -21,7 +28,7 @@ export const Navigation = () => {
     { icon: CreditCardIcon, label: 'Accounts', path: '/app/accounts' },
     { icon: BarChart2Icon, label: 'Stats', path: '/app/stats' },
     { icon: Settings, label: 'Settings', path: '/app/settings' },
-  ].filter(Boolean) as SideNavigationItem[];
+  ].filter(Boolean) as SideNavigationItem[]
 
   if (isMobile) {
     return (
@@ -31,7 +38,11 @@ export const Navigation = () => {
             <Button
               variant="ghost"
               size="icon"
-              className={cn(location.pathname === item.path ? 'text-black' : 'text-gray-400')}
+              className={cn(
+                location.pathname === item.path
+                  ? 'text-black'
+                  : 'text-gray-400',
+              )}
               onClick={() => navigate(item.path)}
             >
               <item.icon className="h-6 w-6" />
@@ -47,13 +58,13 @@ export const Navigation = () => {
     <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
       <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
         <BrandLogo />
-        {navItems.slice(0, -1).map((item) => (
+        {navItems.slice(0, -1).map(item => (
           <NavItem key={item.label} item={item} />
         ))}
       </nav>
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
         <NavItem item={navItems[navItems.length - 1]} />
       </nav>
-    </aside >
+    </aside>
   )
 }

@@ -1,17 +1,35 @@
 import React, { useState } from 'react'
 import { Plus } from 'lucide-react'
-import { useResponsive } from '@/hooks/useResponsive';
-import { Button } from '@/components/ui/button';
-import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer';
-import { DialogFooter, DialogHeader } from '@/components/ui/dialog';
-import { Dialog, DialogTrigger, DialogContent, DialogTitle } from '@/components/ui/dialog';
-import { Transactions } from './transactions';
-import { TransactionTypes } from './types';
+import { useResponsive } from '@/hooks/useResponsive'
+import { Button } from '@/components/ui/button'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer'
+import {
+  DialogClose,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+} from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import { Transactions } from './transactions'
+import { TransactionTypes } from './types'
 
 export const AddTransaction = () => {
   const [open, setOpen] = useState(false)
-  const [selectedTab, setSelectedTab] = useState(TransactionTypes.EXPENSE);
-  const { isMobile } = useResponsive();
+  const [selectedTab, setSelectedTab] = useState(TransactionTypes.EXPENSE)
+  const { isMobile } = useResponsive()
 
   if (isMobile) {
     return (
@@ -27,13 +45,17 @@ export const AddTransaction = () => {
         </DrawerTrigger>
         <DrawerContent>
           <div className="mx-auto w-full max-w-sm">
-            <DrawerHeader className='text-left'>
+            <DrawerHeader className="text-left">
               <DrawerTitle>
-                Record {selectedTab === TransactionTypes.TRANSFER ? 'a' : 'an'} {selectedTab}
+                Record {selectedTab === TransactionTypes.TRANSFER ? 'a' : 'an'}{' '}
+                {selectedTab}
               </DrawerTitle>
             </DrawerHeader>
-            <div className='px-4'>
-              <Transactions selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+            <div className="px-4">
+              <Transactions
+                selectedTab={selectedTab}
+                setSelectedTab={setSelectedTab}
+              />
             </div>
             <DrawerFooter>
               <DrawerClose asChild>
@@ -61,14 +83,25 @@ export const AddTransaction = () => {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>
-              Record {selectedTab === TransactionTypes.TRANSFER ? 'a' : 'an'} {selectedTab}
+              Record {selectedTab === TransactionTypes.TRANSFER ? 'a' : 'an'}{' '}
+              {selectedTab}
             </DialogTitle>
+            <DialogDescription>
+              Enter and submit the details of your transaction
+            </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <Transactions selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
+          <div className="grid gap-4 pt-4">
+            <Transactions
+              selectedTab={selectedTab}
+              setSelectedTab={setSelectedTab}
+            />
           </div>
           <DialogFooter>
-            <Button type="submit">Save changes</Button>
+            <DialogClose asChild>
+              <Button className="w-full" variant="secondary">
+                Cancel
+              </Button>
+            </DialogClose>
           </DialogFooter>
         </DialogContent>
       </Dialog>

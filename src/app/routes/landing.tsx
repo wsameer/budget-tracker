@@ -2,14 +2,13 @@ import React from 'react'
 
 import { Head } from '@/components/seo/head'
 import { Button } from '@/components/ui/button'
-import { Github, HomeIcon } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Github, HomeIcon } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 export const LandingRoute = () => {
+  const navigate = useNavigate()
 
-  const navigate = useNavigate();
-
-  const handleStart = () => navigate('/app');
+  const handleStart = () => navigate('/app')
 
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
@@ -19,7 +18,9 @@ export const LandingRoute = () => {
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Budget Tracker
           </h1>
-          <p className='mt-2'>Manage your daily expenses and keep track of your budget</p>
+          <p className="mt-2">
+            Manage your daily expenses and keep track of your budget
+          </p>
           <div className="mt-8 flex justify-center">
             <div className="inline-flex rounded-md shadow">
               <Button onClick={handleStart}>
@@ -32,9 +33,7 @@ export const LandingRoute = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <Button
-                  variant="outline"
-                >
+                <Button variant="outline">
                   <Github className="mr-2 h-4 w-4" /> Github Repo
                 </Button>
               </a>

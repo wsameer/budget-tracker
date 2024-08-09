@@ -5,7 +5,7 @@ import AppProvider from './app-provider'
 import { createRouter } from './routes'
 
 const AppRouter = () => {
-  const router = useMemo(() => createRouter(), []);
+  const router = useMemo(() => createRouter(), [])
 
   return <RouterProvider router={router} />
 }
