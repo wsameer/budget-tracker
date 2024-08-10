@@ -12,9 +12,7 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { DateSelector } from './forms-fields/date-selector'
-import { CategorySelector } from './forms-fields/category-selector'
-import { AccountSelector } from './forms-fields/account-selector'
+import { AccountSelector, DateSelector } from '../forms-fields'
 
 const formSchema = z.object({
   transactionDate: z.date({
@@ -26,10 +24,10 @@ const formSchema = z.object({
       invalid_type_error: 'Amount must be a number',
     })
     .nonnegative(),
-  category: z.string({
-    required_error: 'Please select a category',
+  fromAccount: z.string({
+    required_error: 'Please select an account',
   }),
-  account: z.string({
+  toAccount: z.string({
     required_error: 'Please select an account',
   }),
   note: z.optional(
@@ -37,7 +35,7 @@ const formSchema = z.object({
   ),
 })
 
-export const ExpenseForm = () => {
+export const TransferForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -100,18 +98,18 @@ export const ExpenseForm = () => {
         />
 
         <FormField
-          name="category"
+          name="fromAccount"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <div className="flex items-center mt-4 space-y-0 space-x-2">
-                <FormLabel htmlFor="category" className="w-1/4">
-                  Category
+                <FormLabel htmlFor="fromAccount" className="w-1/4">
+                  From
                 </FormLabel>
-                <CategorySelector
+                <AccountSelector
                   selected={field.value}
                   onSelect={(value: string) => {
-                    form.setValue('category', value)
+                    form.setValue('fromAccount', value)
                   }}
                 />
               </div>
@@ -121,18 +119,18 @@ export const ExpenseForm = () => {
         />
 
         <FormField
-          name="account"
+          name="toAccount"
           control={form.control}
           render={({ field }) => (
             <FormItem>
               <div className="flex items-center mt-4 space-y-0 space-x-2">
-                <FormLabel htmlFor="account" className="w-1/4">
-                  Account
+                <FormLabel htmlFor="toAccount" className="w-1/4">
+                  To
                 </FormLabel>
                 <AccountSelector
                   selected={field.value}
                   onSelect={(value: string) => {
-                    form.setValue('account', value)
+                    form.setValue('toAccount', value)
                   }}
                 />
               </div>
@@ -151,7 +149,7 @@ export const ExpenseForm = () => {
                   Note
                 </FormLabel>
                 <FormControl className="m-0">
-                  <Input className="w-3/4" placeholder="sameer" {...field} />
+                  <Input className="w-3/4" {...field} />
                 </FormControl>
               </div>
               <FormMessage role="alert" />

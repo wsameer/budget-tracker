@@ -1,5 +1,3 @@
-import { z } from 'zod'
-
 export enum TransactionTypes {
   INCOME = 'income',
   EXPENSE = 'expense',

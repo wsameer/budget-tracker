@@ -1,35 +1,32 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { TransactionsProps, TransactionTypes } from './types'
-import { ExpenseForm } from './expense-form'
+import { ExpenseForm, IncomeForm, TransferForm } from './forms'
 
-export const Transactions = React.memo<TransactionsProps>(
+export const Transactions: React.FC<TransactionsProps> = React.memo(
   ({ selectedTab, setSelectedTab }) => {
-    const transactionTypes = Object.values(TransactionTypes)
+    const transactionTypes = useMemo(() => Object.values(TransactionTypes), []);
 
-    const renderContent = useCallback(() => {
-      switch (selectedTab) {
+    const renderContent = useCallback((type: TransactionTypes) => {
+      switch (type) {
         case TransactionTypes.EXPENSE:
-          return <ExpenseForm />
-
+          return <ExpenseForm />;
         case TransactionTypes.INCOME:
-          return <ExpenseForm />
-
+          return <IncomeForm />;
         case TransactionTypes.TRANSFER:
-          return <ExpenseForm />
-
+          return <TransferForm />;
         default:
-          return null
+          return null;
       }
-    }, [selectedTab])
+    }, []);
 
     return (
       <Tabs
         defaultValue={selectedTab}
-        onValueChange={value => setSelectedTab(value as TransactionTypes)}
+        onValueChange={(value) => setSelectedTab(value as TransactionTypes)}
       >
         <TabsList className="grid w-full grid-cols-3">
-          {transactionTypes.map(type => (
+          {transactionTypes.map((type) => (
             <TabsTrigger
               key={type}
               value={type}
@@ -39,12 +36,12 @@ export const Transactions = React.memo<TransactionsProps>(
             </TabsTrigger>
           ))}
         </TabsList>
-        {transactionTypes.map(type => (
+        {transactionTypes.map((type) => (
           <TabsContent key={type} value={type}>
-            {renderContent()}
+            {renderContent(type as TransactionTypes)}
           </TabsContent>
         ))}
       </Tabs>
-    )
-  },
-)
+    );
+  }
+);
